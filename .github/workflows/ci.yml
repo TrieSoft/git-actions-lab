@@ -16,10 +16,22 @@ on:
         description: 'True to print to STDOUT'
         required: true
         type: boolean
-      tags:
-        description: 'Test scenario tags'
-        required: true
-        type: string
+      dev:
+        description: 'Deploy to dev'
+        default: false
+        type: boolean
+      staging:
+        description: 'Deploy to staging'
+        default: false
+        type: boolean
+      qat:
+        description: 'Deploy to qat'
+        default: false
+        type: boolean
+      prod:
+        description: 'Deploy to prod'
+        default: false
+        type: boolean
 
 jobs:
   print_context:

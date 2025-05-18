@@ -38,7 +38,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - env:
-          EVENT_CONTEXT: ${{ toJSON(github.event) }}
+         CHK_DEV: ${{ inputs.dev }}
+         CHK_STAGING: ${{ inputs.staging }}
+         CHK_QAT: ${{ inputs.qat }}
+         CHK_PROD: ${{ inputs.prod }}
+         ENV_VAR: qat
         run: |
-          echo $EVENT_CONTEXT
+          echo CHK_DEV
+      - name: my script
+        run: |
+         if [[ "${{ inputs.prod }}" == "true" ]]; then
+          ENV_VAR=prod
+         elif [[ "${{ inputs.qat }}" == "true" ]]; then
+          ENV_VAR=qat
+         elif [[ "${{ inputs.staging }}" == "true" ]]; then
+          ENV_VAR=staging
+         elif [[ "${{ inputs.dev }}" == "true" ]]; then
+          ENV_VAR=dev
+         else
+          ENV_VAR=none
+         fi
+         echo "ENV_VAR=$ENV_VAR" >> $GITHUB_ENV
+
  

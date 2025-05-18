@@ -45,19 +45,27 @@ jobs:
          ENV_VAR: qat
         run: |
           echo CHK_DEV
-      - name: Set ENV_VAR based on input
+      - name: Set ENV_VAR as comma-separated values
         run: |
-         if [[ "${{ inputs.prod }}" == "true" ]]; then
-          ENV_VAR=prod
-         elif [[ "${{ inputs.qat }}" == "true" ]]; then
-          ENV_VAR=qat
-         elif [[ "${{ inputs.staging }}" == "true" ]]; then
-          ENV_VAR=staging
-         elif [[ "${{ inputs.dev }}" == "true" ]]; then
-          ENV_VAR=dev
-         else
-          ENV_VAR=none
+         ENV_VAR=""
+         if [[ "${{ inputs.dev }}" == "true" ]]; then
+           ENV_VAR="${ENV_VAR}dev,"
          fi
+
+         if [[ "${{ inputs.staging }}" == "true" ]]; then
+           ENV_VAR="${ENV_VAR}staging,"
+         fi
+
+         if [[ "${{ inputs.qat }}" == "true" ]]; then
+           ENV_VAR="${ENV_VAR}qat,"
+         fi
+
+         if [[ "${{ inputs.prod }}" == "true" ]]; then
+           ENV_VAR="${ENV_VAR}prod,"
+         fi
+         
+         # Remove trailing comma if present
+         ENV_VAR="${ENV_VAR%,}"
          echo "ENV_VAR=$ENV_VAR" >> $GITHUB_ENV
       - name: Use ENV_VAR in next step
         run: |

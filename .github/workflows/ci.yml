@@ -32,10 +32,12 @@ on:
         description: 'Deploy to prod'
         default: false
         type: boolean
+ schedule:
+    - cron: '* * * * *' # Runs every minute
 
 jobs:
   print_context:
-    runs-on: [self-hosted, RPATIL]
+    runs-on: ubuntu-latest
     steps:
       - env:
          CHK_DEV: ${{ inputs.dev }}
@@ -73,4 +75,3 @@ jobs:
         env:
          ENV_VAR: ${{ env.ENV_VAR }}
 
- 

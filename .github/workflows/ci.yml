@@ -36,7 +36,7 @@ on:
 jobs:
   print_context:
     runs-on:
-     group: local-runner
+     group: Default
      labels: [self-hosted]
     steps:
       - env:

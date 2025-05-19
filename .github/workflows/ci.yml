@@ -79,4 +79,7 @@ jobs:
       - name: Build .NET app
         run: |
           dotnet build GitHubLab/ConsoleApp/ConsoleApp.csproj --configuration Release
+      - name: Run .NET app
+        run: |
+          dotnet GitHubLab/ConsoleApp/bin/Release/net8.0/ConsoleApp.dll
 

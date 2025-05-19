@@ -39,6 +39,8 @@ jobs:
   print_context:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - env:
          CHK_DEV: ${{ inputs.dev }}
          CHK_STAGING: ${{ inputs.staging }}
@@ -74,4 +76,7 @@ jobs:
          echo "The environment is: $ENV_VAR"
         env:
          ENV_VAR: ${{ env.ENV_VAR }}
+      - name: Build .NET app
+        run: |
+          dotnet build GitHubLab/ConsoleApp/ConsoleApp.csproj --configuration Release
 

@@ -35,7 +35,9 @@ on:
 
 jobs:
   print_context:
-    runs-on: ubuntu-latest
+    runs-on:
+     group: local-runner
+     labels: [self-hosted]
     steps:
       - env:
          CHK_DEV: ${{ inputs.dev }}

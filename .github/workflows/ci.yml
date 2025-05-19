@@ -1,7 +1,8 @@
 name: CI
 
 on:
-  push:
+  schedule:
+    - cron: '* * * * *' # Runs every minute
   workflow_dispatch:
     inputs:
       logLevel:
@@ -33,8 +34,6 @@ on:
         description: 'Deploy to prod'
         default: false
         type: boolean
-  schedule:
-    - cron: '* * * * *' # Runs every minute
 
 jobs:
   print_context:

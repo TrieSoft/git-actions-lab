@@ -35,9 +35,7 @@ on:
 
 jobs:
   print_context:
-    runs-on:
-     group: Default
-     labels: [self-hosted]
+    runs-on: [self-hosted, RPATIL]
     steps:
       - env:
          CHK_DEV: ${{ inputs.dev }}
